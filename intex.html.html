@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Just For You❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff0f6;
+      --accent:#ff4d79;
+      --deep:#d6336c;
+      --card:#ffffff;
+      --muted:#666;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,system-ui;background:linear-gradient(180deg,var(--bg),#fff);color:#222}
+
+    /* LOCK SCREEN */
+    .lock{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ffe3ec,#fff);z-index:100}
+    .lock-card{background:#fff;padding:36px;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);text-align:center;max-width:320px;width:100%}
+    .lock-card h1{font-family:Pacifico;color:var(--deep);margin-top:0}
+    .lock-card input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.15)}
+    .lock-card button{margin-top:14px;width:100%;padding:10px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+    .error{color:#d00;font-size:13px;margin-top:8px}
+
+    header{text-align:center;padding:46px 20px}
+    header h1{font-family:Pacifico;font-size:44px;color:var(--deep);margin:0}
+    header p{color:var(--muted)}
+
+    .container{max-width:1000px;margin:auto;padding:20px}
+    .card{background:var(--card);border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.08);padding:28px;margin-bottom:36px}
+    h2{color:var(--deep);margin-top:0}
+
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .photo{border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.1)}
+    .photo img{width:100%;height:100%;object-fit:cover}
+
+    /* TIMELINE */
+    .timeline{border-left:3px solid var(--accent);padding-left:20px}
+    .event{margin-bottom:24px}
+    .event h3{margin:0;color:var(--deep)}
+    .event span{font-size:13px;color:var(--muted)}
+
+    /* VALENTINE QUESTION */
+    .question{text-align:center}
+    .question h1{font-family:Pacifico;color:var(--deep);font-size:42px}
+    .actions{margin-top:20px}
+    .actions button{padding:12px 18px;border-radius:12px;border:none;font-size:16px;font-weight:600;margin:0 8px;cursor:pointer}
+    .yes{background:var(--accent);color:#fff}
+    .no{background:#eee}
+
+    footer{text-align:center;font-size:13px;color:var(--muted);padding:30px}
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="lock" id="lock">
+  <div class="lock-card">
+    <h1>my Ponnou ❤️</h1>
+    <p>Enter the secret word to continue</p>
+    <input id="pass" placeholder="Secret word">
+    <button onclick="unlock()">Unlock</button>
+    <div class="error" id="err"></div>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <!-- Replace music.mp3 with your own file -->
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+  <h1>Our Little Love Space 💕</h1>
+  <p>Scroll slowly… every part is for you</p>
+</header>
+
+<div class="container">
+
+  <!-- MESSAGE -->
+  <div class="card">
+    <h2>For You 💌</h2>
+    <p style="font-size:18px">From our first hello to today, every moment with you feels special. This little website is just a reminder of how much you mean to me.</p>
+    <p style="text-align:right">— your ulli</p>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="card">
+    <h2>Our Memories 📸</h2>
+    <input type="file" accept="image/*" multiple onchange="addImages(event)">
+    <div class="gallery" id="gallery"></div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="card">
+    <h2>Our Timeline 🕰️</h2>
+    <div class="timeline">
+      <div class="event">
+        <h3>First Chat 💬</h3>
+         <span>7/02/2025</span>
+    
+        <span>The day everything started</span>
+      </div>
+      <div class="event">
+        <h3>First Meet 🌸</h3>
+         <span>21/09/2025</span>
+        <span>Nervous smiles & happy hearts</span>
+      </div>
+      <div class="event">
+        <h3>Today ❤️</h3>
+        <span>Still choosing you</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="card question">
+    <h1>Will you be my Valentine? 💖</h1>
+    <div class="actions">
+      <button class="yes" onclick="yes()">YES 💕</button>
+      <button class="no" onclick="no()">Hmm…</button>
+    </div>
+    <p id="answer" style="margin-top:20px;font-size:20px"></p>
+  </div>
+
+</div>
+
+<footer>
+  Made only for you ❤️ | Share this link on WhatsApp
+</footer>
+
+<script>
+  const PASSWORD = 'ulli'; // CHANGE THIS SECRET WORD
+
+  function unlock(){
+    const val = document.getElementById('pass').value;
+    if(val === PASSWORD){
+      document.getElementById('lock').style.display='none';
+      document.getElementById('music').play();
+    } else {
+      document.getElementById('err').innerText='Wrong secret… try again ❤️';
+    }
+  }
+
+  function addImages(e){
+    const gallery = document.getElementById('gallery');
+    [...e.target.files].forEach(file=>{
+      const reader = new FileReader();
+      reader.onload = ev =>{
+        const div = document.createElement('div');
+        div.className='photo';
+        div.innerHTML=`<img src="${ev.target.result}">`;
+        gallery.appendChild(div);
+      }
+      reader.readAsDataURL(file);
+    })
+  }
+
+  function yes(){
+    document.getElementById('answer').innerHTML='Muahhhhhhhh ponnee 💖';
+  }
+  function no(){
+    document.getElementById('answer').innerHTML='Still muahhhhhhhh ponnee 💖';
+  }
+</script>
+
+</body>
+</html>
