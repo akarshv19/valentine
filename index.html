@@ -3,53 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Just For You❤️</title>
+  <title>Just For You ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#fff0f6;
+      --bg:#0f0b12;
       --accent:#ff4d79;
-      --deep:#d6336c;
-      --card:#ffffff;
-      --muted:#666;
+      --deep:#ff7aa2;
+      --card:#1a1320;
+      --text:#f5e9f0;
+      --muted:#b8a9b5;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Poppins,system-ui;background:linear-gradient(180deg,var(--bg),#fff);color:#222}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui;
+      background:radial-gradient(circle at top, #1d1025, var(--bg));
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    /* FLOATING HEARTS */
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      color:var(--accent);
+      font-size:18px;
+      animation:floatUp linear forwards;
+      z-index:0;
+      pointer-events:none;
+    }
+    @keyframes floatUp{
+      from{transform:translateY(0) scale(1);opacity:1}
+      to{transform:translateY(-110vh) scale(1.6);opacity:0}
+    }
 
     /* LOCK SCREEN */
-    .lock{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ffe3ec,#fff);z-index:100}
-    .lock-card{background:#fff;padding:36px;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.12);text-align:center;max-width:320px;width:100%}
+    .lock{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#2a1636,#0f0b12);z-index:100}
+    .lock-card{background:var(--card);padding:36px;border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.6);text-align:center;max-width:320px;width:100%}
     .lock-card h1{font-family:Pacifico;color:var(--deep);margin-top:0}
-    .lock-card input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.15)}
+    .lock-card input{width:100%;padding:10px 12px;border-radius:10px;border:none;background:#2a2033;color:var(--text)}
     .lock-card button{margin-top:14px;width:100%;padding:10px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
-    .error{color:#d00;font-size:13px;margin-top:8px}
+    .error{color:#ff9aa2;font-size:13px;margin-top:8px}
 
-    header{text-align:center;padding:46px 20px}
-    header h1{font-family:Pacifico;font-size:44px;color:var(--deep);margin:0}
+    header{text-align:center;padding:56px 20px;position:relative;z-index:1}
+    header h1{font-family:Pacifico;font-size:46px;color:var(--deep);margin:0}
     header p{color:var(--muted)}
 
-    .container{max-width:1000px;margin:auto;padding:20px}
-    .card{background:var(--card);border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.08);padding:28px;margin-bottom:36px}
+    .container{max-width:1000px;margin:auto;padding:20px;position:relative;z-index:1}
+    .card{background:var(--card);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:30px;margin-bottom:40px}
     h2{color:var(--deep);margin-top:0}
 
+    /* COUNTER */
+    .counter{font-size:22px;text-align:center;margin-top:10px;color:#ffd1e1}
+
     /* GALLERY */
-    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .photo{border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.1)}
-    .photo img{width:100%;height:100%;object-fit:cover}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+    .photo{border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.6);background:#000}
+    .photo img{width:100%;height:240px;object-fit:cover;display:block}
+    .caption{padding:8px 10px;font-size:13px;color:var(--muted);background:#140c1a}
 
     /* TIMELINE */
-    .timeline{border-left:3px solid var(--accent);padding-left:20px}
-    .event{margin-bottom:24px}
+    .timeline{border-left:3px solid var(--accent);padding-left:22px}
+    .event{margin-bottom:26px}
     .event h3{margin:0;color:var(--deep)}
     .event span{font-size:13px;color:var(--muted)}
 
-    /* VALENTINE QUESTION */
+    /* QUESTION */
     .question{text-align:center}
-    .question h1{font-family:Pacifico;color:var(--deep);font-size:42px}
+    .question h1{font-family:Pacifico;color:var(--deep);font-size:44px}
     .actions{margin-top:20px}
-    .actions button{padding:12px 18px;border-radius:12px;border:none;font-size:16px;font-weight:600;margin:0 8px;cursor:pointer}
+    .actions button{padding:12px 20px;border-radius:14px;border:none;font-size:16px;font-weight:600;margin:0 8px;cursor:pointer}
     .yes{background:var(--accent);color:#fff}
-    .no{background:#eee}
+    .no{background:#2a2033;color:var(--text)}
+
+    /* REPLY FORM */
+    textarea{width:100%;border-radius:14px;border:none;padding:12px;background:#2a2033;color:var(--text);margin-top:10px}
+    .send{margin-top:12px;background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:12px;font-weight:600;cursor:pointer}
 
     footer{text-align:center;font-size:13px;color:var(--muted);padding:30px}
   </style>
@@ -69,22 +99,27 @@
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <!-- Replace music.mp3 with your own file -->
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <header>
   <h1>Our Little Love Space 💕</h1>
-  <p>Scroll slowly… every part is for you</p>
+  <p>Every heartbeat, every memory… us.</p>
 </header>
 
 <div class="container">
 
+  <!-- COUNTER -->
+  <div class="card">
+    <h2>Us Since 💞</h2>
+    <div class="counter" id="counter"></div>
+  </div>
+
   <!-- MESSAGE -->
   <div class="card">
     <h2>For You 💌</h2>
-    <p style="font-size:18px">From our first hello to today, every moment with you feels special. This little website is just a reminder of how much you mean to me.</p>
-    <p style="text-align:right">— your ulli</p>
+    <p style="font-size:18px">From our first hello to today, every moment with you feels magical. This space exists only because of you.</p>
+    <p style="text-align:right">— Akarsh</p>
   </div>
 
   <!-- GALLERY -->
@@ -100,14 +135,11 @@
     <div class="timeline">
       <div class="event">
         <h3>First Chat 💬</h3>
-         <span>7/02/2025</span>
-    
-        <span>The day everything started</span>
+        <span>07/02/2025 — where it all began</span>
       </div>
       <div class="event">
         <h3>First Meet 🌸</h3>
-         <span>21/09/2025</span>
-        <span>Nervous smiles & happy hearts</span>
+        <span>21/09/2025 — nervous smiles</span>
       </div>
       <div class="event">
         <h3>Today ❤️</h3>
@@ -121,30 +153,62 @@
     <h1>Will you be my Valentine? 💖</h1>
     <div class="actions">
       <button class="yes" onclick="yes()">YES 💕</button>
-      <button class="no" onclick="no()">Hmm…</button>
+      <button class="no" onclick="no()">Still YES 😌</button>
     </div>
     <p id="answer" style="margin-top:20px;font-size:20px"></p>
+  </div>
+
+  <!-- REPLY -->
+  <div class="card">
+    <h2>Send Me Your Answer 💬</h2>
+    <textarea id="reply" placeholder="Type your yes here 😉"></textarea>
+    <button class="send" onclick="sendReply()">Send</button>
+    <p id="sent" style="margin-top:10px"></p>
   </div>
 
 </div>
 
 <footer>
-  Made only for you ❤️ | Share this link on WhatsApp
+  Made only for you 🌙❤️ | Share this link on WhatsApp
 </footer>
 
 <script>
-  const PASSWORD = 'ulli'; // CHANGE THIS SECRET WORD
+  const PASSWORD = 'ulli';
+  const START_DATE = new Date('2025-02-07');
 
   function unlock(){
     const val = document.getElementById('pass').value;
     if(val === PASSWORD){
       document.getElementById('lock').style.display='none';
       document.getElementById('music').play();
+      startHearts();
     } else {
       document.getElementById('err').innerText='Wrong secret… try again ❤️';
     }
   }
 
+  // DATE COUNTER
+  function updateCounter(){
+    const now = new Date();
+    const diff = Math.floor((now - START_DATE)/(1000*60*60*24));
+    document.getElementById('counter').innerText = `${diff} days of us ❤️`;
+  }
+  updateCounter();
+
+  // FLOATING HEARTS
+  function startHearts(){
+    setInterval(()=>{
+      const h = document.createElement('div');
+      h.className='heart';
+      h.innerText='❤️';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.animationDuration = (4 + Math.random()*4) + 's';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),8000);
+    },600);
+  }
+
+  // GALLERY WITH CAPTIONS
   function addImages(e){
     const gallery = document.getElementById('gallery');
     [...e.target.files].forEach(file=>{
@@ -152,7 +216,8 @@
       reader.onload = ev =>{
         const div = document.createElement('div');
         div.className='photo';
-        div.innerHTML=`<img src="${ev.target.result}">`;
+        const caption = prompt('Caption for this photo?','One of my favorite memories ❤️');
+        div.innerHTML=`<img src="${ev.target.result}"><div class="caption">${caption||''}</div>`;
         gallery.appendChild(div);
       }
       reader.readAsDataURL(file);
@@ -164,6 +229,13 @@
   }
   function no(){
     document.getElementById('answer').innerHTML='Still muahhhhhhhh ponnee 💖';
+  }
+
+  function sendReply(){
+    const txt = document.getElementById('reply').value;
+    if(txt.trim()){
+      document.getElementById('sent').innerText='Message sent straight to my heart ❤️';
+    }
   }
 </script>
 
